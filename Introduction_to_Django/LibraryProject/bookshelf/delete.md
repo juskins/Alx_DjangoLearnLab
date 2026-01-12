@@ -3,6 +3,8 @@
 ## Command
 
 ```python
+from bookshelf.models import Book
+
 book.delete()
 all_books = Book.objects.all()
 print(f"All books after deletion: {list(all_books)}")
