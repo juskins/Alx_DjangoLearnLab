@@ -132,21 +132,36 @@ LOGOUT_REDIRECT_URL = 'login'
 AUTH_USER_MODEL = 'bookshelf.CustomUser'
 
 # Security Settings
-# Browser-side protections
+# SECURE_BROWSER_XSS_FILTER: Enables the browser's XSS filtering. 
+# This helps prevent cross-site scripting attacks by instructing the browser to block perceived XSS attacks.
 SECURE_BROWSER_XSS_FILTER = True
+
+# X_FRAME_OPTIONS: Prevents the site from being framed. 
+# Setting it to 'DENY' ensures that your pages cannot be embedded in frames or iframes on other sites, 
+# which protects against clickjacking attacks.
 X_FRAME_OPTIONS = 'DENY'
+
+# SECURE_CONTENT_TYPE_NOSNIFF: Prevents the browser from guessing content types.
+# This ensures that the browser strictly adheres to the Content-Type header sent by the server, 
+# reducing the risk of MIME-type sniffing vulnerabilities.
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Cookie Security (requires HTTPS)
+# CSRF_COOKIE_SECURE: Ensures the CSRF cookie is only sent over HTTPS.
 CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE: Ensures the session cookie is only sent over HTTPS.
 SESSION_COOKIE_SECURE = True
 
 # HTTP Strict Transport Security (HSTS)
-SECURE_HSTS_SECONDS = 31536000  # 1 year
+# SECURE_HSTS_SECONDS: Informs the browser to access the site only via HTTPS for the specified time (1 year).
+SECURE_HSTS_SECONDS = 31536000
+# SECURE_HSTS_INCLUDE_SUBDOMAINS: Applies the HSTS policy to all subdomains.
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD: Allows the site to be included in the browser HSTS preload list.
 SECURE_HSTS_PRELOAD = True
 
-# SSL Redirect
+# SECURE_SSL_REDIRECT: Redirects all non-HTTPS requests to HTTPS.
+# Ensuring all traffic is encrypted during transmission.
 SECURE_SSL_REDIRECT = True
 
 # Content Security Policy (CSP)
