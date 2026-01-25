@@ -164,6 +164,10 @@ SECURE_HSTS_PRELOAD = True
 # Ensuring all traffic is encrypted during transmission.
 SECURE_SSL_REDIRECT = True
 
+# SECURE_PROXY_SSL_HEADER: Tells Django to trust the X-Forwarded-Proto header 
+# from a proxy to determine if a request is secure.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # Content Security Policy (CSP)
 CSP_DEFAULT_SRC = ("'self'",)
 CSP_STYLE_SRC = ("'self'", "https://fonts.googleapis.com")
