@@ -1,0 +1,83 @@
+from django.shortcuts import render, redirect
+from django.views.generic.detail import DetailView
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import LoginView, LogoutView
+from .models import Library
+from .models import Book
+
+# Create your views here.
+
+# Function-based view to list all books
+def list_books(request):
+    """
+    Function-based view that lists all books in the database.
+    Retrieves all books and renders them in the list_books.html template.
+    """
+    books = Book.objects.all()
+    return render(request, 'relationship_app/list_books.html', {'books': books})
+
+
+# Class-based view to display library details
+class LibraryDetailView(DetailView):
+    """
+    Class-based view that displays details for a specific library.
+    Shows the library name and all books available in that library.
+    """
+    model = Library
+    template_name = 'relationship_app/library_detail.html'
+    context_object_name = 'library'
+
+
+from bookshelf.forms import CustomUserCreationForm
+
+# User Registration View
+def register(request):
+    """
+    Function-based view for user registration.
+    Uses CustomUserCreationForm instead of the default.
+    """
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Automatically log in the user after registration
+            return redirect('list_books')  # Redirect to books list after registration
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'relationship_app/register.html', {'form': form})
+from django.contrib.auth.decorators import user_passes_test
+
+def check_role(role):
+    def role_check(user):
+        return user.is_authenticated and user.userprofile.role == role
+    return role_check
+
+@user_passes_test(check_role('Admin'))
+def admin_view(request):
+    return render(request, 'relationship_app/admin_view.html')
+
+@user_passes_test(check_role('Librarian'))
+def librarian_view(request):
+    return render(request, 'relationship_app/librarian_view.html')
+
+@user_passes_test(check_role('Member'))
+def member_view(request):
+    return render(request, 'relationship_app/member_view.html')
+
+from django.contrib.auth.decorators import permission_required
+
+@permission_required('relationship_app.can_add_book', raise_exception=True)
+def add_book(request):
+    # Logic to add a book
+    return render(request, 'relationship_app/add_book.html')
+
+@permission_required('relationship_app.can_change_book', raise_exception=True)
+def edit_book(request, book_id):
+    # Logic to edit a book
+    return render(request, 'relationship_app/edit_book.html', {'book_id': book_id})
+
+@permission_required('relationship_app.can_delete_book', raise_exception=True)
+def delete_book(request, book_id):
+    # Logic to delete a book
+    return render(request, 'relationship_app/delete_book.html', {'book_id': book_id})
