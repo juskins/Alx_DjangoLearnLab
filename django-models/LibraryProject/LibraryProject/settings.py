@@ -125,3 +125,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Authentication settings
 LOGIN_REDIRECT_URL = 'list_books'
 LOGOUT_REDIRECT_URL = 'login'
+
+# SECURE_PROXY_SSL_HEADER: Tells Django to trust the X-Forwarded-Proto header 
+# from a proxy to determine if a request is secure.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
