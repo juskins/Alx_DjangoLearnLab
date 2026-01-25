@@ -62,3 +62,20 @@ def librarian_view(request):
 @user_passes_test(check_role('Member'))
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
+
+from django.contrib.auth.decorators import permission_required
+
+@permission_required('relationship_app.can_add_book', raise_exception=True)
+def add_book(request):
+    # Logic to add a book
+    return render(request, 'relationship_app/add_book.html')
+
+@permission_required('relationship_app.can_change_book', raise_exception=True)
+def edit_book(request, book_id):
+    # Logic to edit a book
+    return render(request, 'relationship_app/edit_book.html', {'book_id': book_id})
+
+@permission_required('relationship_app.can_delete_book', raise_exception=True)
+def delete_book(request, book_id):
+    # Logic to delete a book
+    return render(request, 'relationship_app/delete_book.html', {'book_id': book_id})
