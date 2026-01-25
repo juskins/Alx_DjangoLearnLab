@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Security Form Example</title>
+</head>
+<body>
+    <h1>Secure Form Implementation</h1>
+    
+    <!-- This form demonstrates the use of CSRF tokens for protection -->
+    <form method="POST" action=".">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Securely</button>
+    </form>
+
+    <p>Security Note: This form is protected by Django's CSRF middleware and requires a valid CSRF token to be submitted successfully.</p>
+</body>
+</html>
