@@ -44,3 +44,19 @@ This project implements a Django REST API for managing Authors and Books.
     - **Filtering**: Filter books by `title`, `author__name`, and `publication_year` using query parameters (e.g., `/api/books/?publication_year=2020`).
     - **Searching**: Search books by `title` and `author__name` (e.g., `/api/books/?search=Django`).
     - **Ordering**: Sort books by `title` or `publication_year` (e.g., `/api/books/?ordering=-publication_year`).
+
+## Testing
+
+The project uses Django's built-in test framework. Tests are located in `api/test_views.py`.
+
+### Running Tests
+To run the full test suite, execute:
+```bash
+python manage.py test api
+```
+
+### Test Coverage
+- **CRUD Operations**: Verifies creation, retrieval, updates, and deletion of books.
+- **Query Parameters**: Validates filtering, searching, and ordering functionality.
+- **Permissions**: Ensures only authenticated users can perform write operations while everyone can read.
+- **Data Integrity**: Checks that the response data matches the expected model states.

@@ -7,7 +7,7 @@ import datetime
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = ['title', 'publication_year', 'author']
+        fields = ['id', 'title', 'publication_year', 'author']
 
     # Custom validation to ensure publication_year is not in the future.
     def validate_publication_year(self, value):
@@ -23,4 +23,4 @@ class AuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Author
-        fields = ['name', 'books']
+        fields = ['id', 'name', 'books']
