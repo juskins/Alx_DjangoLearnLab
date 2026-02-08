@@ -17,21 +17,26 @@ This project implements a Django REST API for managing Authors and Books.
 
 ## API Endpoints
 
--   `GET /api/authors/`: List all authors and their books.
--   `POST /api/authors/`: Create a new author.
--   `GET /api/authors/<id>/`: Retrieve a specific author.
--   `PUT /api/authors/<id>/`: Update an author.
--   `DELETE /api/authors/<id>/`: Remove an author.
--   `GET /api/books/`: List all books.
--   `POST /api/books/`: Create a new book.
--   `GET /api/books/<id>/`: Retrieve a specific book.
--   `PUT /api/books/<id>/`: Update a book.
--   `DELETE /api/books/<id>/`: Remove a book.
+### Books
+- `GET /api/books/`: List all books. (Open Access)
+- `GET /api/books/<int:pk>/`: Retrieve a specific book by ID. (Open Access)
+- `POST /api/books/create/`: Add a new book. (Authenticated Users Only)
+- `PUT /api/books/update/<int:pk>/`: Update an existing book. (Authenticated Users Only)
+- `DELETE /api/books/delete/<int:pk>/`: Delete a book. (Authenticated Users Only)
+
+### Authors
+- `GET /api/authors/`: List all authors.
+- `GET /api/authors/<int:pk>/`: Retrieve a specific author.
 
 ## Features
 
--   **Models**: `Author` and `Book` with a one-to-many relationship.
--   **Serializers**:
-    -   `BookSerializer`: Includes custom validation to prevent future publication years.
-    -   `AuthorSerializer`: Includes nested `BookSerializer` to list related books.
--   **Views**: Generic API views for boilerplate-free CRUD operations.
+- **Models**: `Author` and `Book` with a one-to-many relationship.
+- **Serializers**:
+    - `BookSerializer`: Includes custom validation to prevent future publication years.
+    - `AuthorSerializer`: Includes nested `BookSerializer` to list related books.
+- **Views**: 
+    - Separate generic views for each Book CRUD operation (`ListView`, `DetailView`, `CreateView`, `UpdateView`, `DeleteView`).
+    - Custom logic in `perform_create` and `perform_update` for future extensibility.
+- **Permissions**:
+    - Unauthenticated users have Read-Only access (`GET`).
+    - Authenticated users can Create, Update, and Delete.
