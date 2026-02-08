@@ -40,3 +40,7 @@ This project implements a Django REST API for managing Authors and Books.
 - **Permissions**:
     - Unauthenticated users have Read-Only access (`GET`).
     - Authenticated users can Create, Update, and Delete.
+- **Advanced Querying**:
+    - **Filtering**: Filter books by `title`, `author__name`, and `publication_year` using query parameters (e.g., `/api/books/?publication_year=2020`).
+    - **Searching**: Search books by `title` and `author__name` (e.g., `/api/books/?search=Django`).
+    - **Ordering**: Sort books by `title` or `publication_year` (e.g., `/api/books/?ordering=-publication_year`).
