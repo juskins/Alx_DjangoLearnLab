@@ -73,6 +73,27 @@ header nav ul li a {
     border-color: #d6e9c6;
 }
 
+.comments {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #eee;
+}
+
+.comment {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border-left: 4px solid #333;
+}
+
+.add-comment {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
 footer {
     text-align: center;
     margin-top: 50px;

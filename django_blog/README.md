@@ -16,12 +16,17 @@ A comprehensive blogging platform built with Django.
 *   **Update Post**: Authors can edit their own posts.
 *   **Delete Post**: Authors can remove their own posts.
 
+### 3. Comment System
+*   **Add Comments**: Authenticated users can comment on any post directly from the detail page.
+*   **View Comments**: All visitors can see comments associated with a post.
+*   **Edit/Delete Comments**: Only the author of a comment can update or remove it.
+
 ## Installation and Setup
 
 1.  **Clone the repository** (if applicable).
 2.  **Install Django**:
     ```bash
-    pip install django
+    pip install django django-crispy-forms crispy-bootstrap4
     ```
 3.  **Run Migrations**:
     ```bash
@@ -34,9 +39,12 @@ A comprehensive blogging platform built with Django.
     ```
 
 ## Permissions and Access Control
-*   **Public**: Anyone can view the list of posts and individual post details.
-*   **Authentication Required**: Users must be logged in to create a post.
-*   **Author Only**: Only the creator of a post has permission to edit or delete it. This is enforced using `UserPassesTestMixin` in the views.
+*   **Public**: Anyone can view posts and their comments.
+*   **Authentication Required**: Must be logged in to create posts or add comments.
+*   **Author Only**: 
+    - Only post authors can edit/delete their posts.
+    - Only comment authors can edit/delete their comments.
+    - Enforced via `UserPassesTestMixin`.
 
 ## URL Structure
 *   `/`: Post list (Home)
@@ -44,6 +52,9 @@ A comprehensive blogging platform built with Django.
 *   `/post/new/`: Create a new post
 *   `/post/<int:pk>/update/`: Edit a post
 *   `/post/<int:pk>/delete/`: Delete a post
+*   `/post/<int:pk>/comments/new/`: Add a comment
+*   `/comment/<int:pk>/update/`: Edit a comment
+*   `/comment/<int:pk>/delete/`: Delete a comment
 *   `/register/`: User registration
 *   `/login/`: User login
 *   `/logout/`: User logout
