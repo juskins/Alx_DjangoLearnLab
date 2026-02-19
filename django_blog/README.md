@@ -21,12 +21,17 @@ A comprehensive blogging platform built with Django.
 *   **View Comments**: All visitors can see comments associated with a post.
 *   **Edit/Delete Comments**: Only the author of a comment can update or remove it.
 
+### 4. Tagging and Search
+*   **Post Tagging**: Categorize posts using multiple tags for better organization.
+*   **Search Functionality**: A global search bar to find posts by title, content, or specific tags.
+*   **Tag Filtering**: Click on any tag to view all posts associated with that tag.
+
 ## Installation and Setup
 
 1.  **Clone the repository** (if applicable).
-2.  **Install Django**:
+2.  **Install Dependencies**:
     ```bash
-    pip install django django-crispy-forms crispy-bootstrap4
+    pip install django django-taggit
     ```
 3.  **Run Migrations**:
     ```bash
@@ -39,12 +44,11 @@ A comprehensive blogging platform built with Django.
     ```
 
 ## Permissions and Access Control
-*   **Public**: Anyone can view posts and their comments.
-*   **Authentication Required**: Must be logged in to create posts or add comments.
+*   **Public**: Anyone can view posts, comments, and perform searches.
+*   **Authentication Required**: Must be logged in to create posts, manage profiles, or add comments.
 *   **Author Only**: 
-    - Only post authors can edit/delete their posts.
-    - Only comment authors can edit/delete their comments.
-    - Enforced via `UserPassesTestMixin`.
+    - Only post authors can edit/delete their own posts.
+    - Only comment authors can edit/delete their own comments.
 
 ## URL Structure
 *   `/`: Post list (Home)
@@ -55,6 +59,8 @@ A comprehensive blogging platform built with Django.
 *   `/post/<int:pk>/comments/new/`: Add a comment
 *   `/comment/<int:pk>/update/`: Edit a comment
 *   `/comment/<int:pk>/delete/`: Delete a comment
+*   `/search/`: Search blog posts
+*   `/tags/<str:tag_name>/`: Filter posts by tag
 *   `/register/`: User registration
 *   `/login/`: User login
 *   `/logout/`: User logout
