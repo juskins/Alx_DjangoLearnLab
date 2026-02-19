@@ -133,7 +133,7 @@ class PostByTagListView(ListView):
     context_object_name = 'posts'
 
     def get_queryset(self):
-        return Post.objects.filter(tags__name__icontains=self.kwargs['tag_name']).order_by('-published_date')
+        return Post.objects.filter(tags__slug=self.kwargs['tag_slug']).order_by('-published_date')
 
 def search(request):
     query = request.GET.get('q')

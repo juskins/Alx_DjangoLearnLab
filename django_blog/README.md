@@ -60,7 +60,7 @@ A comprehensive blogging platform built with Django.
 *   `/comment/<int:pk>/update/`: Edit a comment
 *   `/comment/<int:pk>/delete/`: Delete a comment
 *   `/search/`: Search blog posts
-*   `/tags/<str:tag_name>/`: Filter posts by tag
+*   `/tags/<slug:tag_slug>/`: Filter posts by tag
 *   `/register/`: User registration
 *   `/login/`: User login
 *   `/logout/`: User logout
